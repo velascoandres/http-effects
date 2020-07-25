@@ -16,9 +16,14 @@ export class UsuarioService {
   ) {
   }
 
-  getUsers(): Observable<UsuarioInterface[]> {
-    const uri = this.url + '/users';
-    const respuesta$ = this.httpClient.get(uri) as Observable<ResponseInterface<UsuarioInterface>>;
+  getUsers(parametros?): Observable<UsuarioInterface[] | UsuarioInterface> {
+    const uri = this.url + '/users?page=2&delay=1';
+    const respuesta$ = this.httpClient.get(
+      uri,
+      {
+        params: parametros,
+      }
+    ) as Observable<ResponseInterface<UsuarioInterface>>;
     return respuesta$
       .pipe(
         map(
